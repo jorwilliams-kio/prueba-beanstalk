@@ -1,6 +1,4 @@
-const express = require('express');
-const mysql = require('mysql');
-const app = express();
+var mysql = require('mysql');
 
 var connection = mysql.createConnection({
   host     : process.env.RDS_HOSTNAME,
@@ -9,21 +7,13 @@ var connection = mysql.createConnection({
   port     : process.env.RDS_PORT
 });
 
-app.get('/', (req, res) => {
-  connection.connect(function(err) {
-    if (err) {
-      console.error('Database connection failed: ' + err.stack);
-      return;
-    }
-  
-    console.log('Connected to database.');
-  });
-  connection.end();
+connection.connect(function(err) {
+  if (err) {
+    console.error('Database connection failed: ' + err.stack);
+    return;
+  }
 
-  res.send("Prueba Beanstalk exitosa");
+  console.log('Connected to database.');
 });
 
-const port = process.env.port || 3000
-app.listen(port, () => {
-  console.log("Server up");
-})
+connection.end();
