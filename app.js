@@ -13,6 +13,7 @@ const connection = mysql.createConnection({
   user     : "admin",
   password : "EBDBjw.93",
   port     : "3306",
+  database : "EBDB"
 });
 
 const app = express();
@@ -29,10 +30,10 @@ app.get('/', (req, res) => {
     console.log('Connected to database !!!!.');
   });
   
+  const data = connection.query('SELECT * FROM CONTEST_TYPES')
   connection.end();
-  // connection.query('SELECT * FROM CATEGORIES')
   
-  res.send("Prueba Beanstalk exitosa");
+  res.send(data);
 });
 
 const port = process.env.port || 3000
