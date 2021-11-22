@@ -1,4 +1,5 @@
 const express = require('express');
+const { json } = require('express/lib/response');
 let mysql = require('mysql');
 
 // const connection = mysql.createConnection({
@@ -32,7 +33,7 @@ app.get('/', (req, res) => {
   const data = connection.query('USE EBDB; SELECT * FROM CONTEST_TYPES;')
   connection.end();
   
-  res.send(data);
+  res.send(JSON.stringify(data));
 });
 
 const port = process.env.port || 3000
