@@ -7,6 +7,7 @@ const connection = mysql.createConnection({
   user     : process.env.testusername,
   password : process.env.testpassword,
   port     : process.env.testport,
+  database : "EBDB"
 });
 
 const app = express();
@@ -22,7 +23,7 @@ connection.connect(function(err) {
   console.log('Connected to database !!!!.');
 });
 
-const data = connection.query('USE EBDB; SELECT * FROM CONTEST_TYPES;');
+const data = connection.query('SELECT * FROM CONTEST_TYPES;');
 connection.end();
 
 
