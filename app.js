@@ -1,4 +1,4 @@
-const express = require('express');
+// const express = require('express');
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
@@ -6,12 +6,11 @@ var connection = mysql.createConnection({
   user     : process.env.RDS_USERNAME,
   password : process.env.RDS_PASSWORD,
   port     : process.env.RDS_PORT,
-  database : process.env.RDS_DB_NAME
 });
 
-const app = express();
+// const app = express();
 
-app.get('/', (req, res) => {
+// app.get('/', (req, res) => {
   connection.connect(function(err) {
     if (err) {
       console.error('Database connection failed: ' + err.stack);
@@ -25,10 +24,10 @@ app.get('/', (req, res) => {
   // connection.query('SELECT * FROM CATEGORIES')
 
   connection.end();
-  res.send("Prueba Beanstalk exitosa");
-});
+  // res.send("Prueba Beanstalk exitosa");
+// });
 
-const port = process.env.port || 3000
-app.listen(port, () => {
-  console.log("Server up");
-})
+// const port = process.env.port || 3000
+// app.listen(port, () => {
+//   console.log("Server up");
+// })
