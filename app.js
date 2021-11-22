@@ -19,7 +19,7 @@ const connection = mysql.createConnection({
 const app = express();
 
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   connection.connect(function(err) {
     if (err) {
       // console.error('Database connection failed: ' + err.stack);
@@ -30,10 +30,10 @@ app.get('/', (req, res) => {
     console.log('Connected to database !!!!.');
   });
   
-  const data = connection.query('USE EBDB; SELECT * FROM CONTEST_TYPES;')
+  const data = await connection.query('USE EBDB; SELECT * FROM CONTEST_TYPES;')
   connection.end();
   
-  res.json(JSON.stringify(data));
+  res.json(data);
 });
 
 const port = process.env.port || 3000
