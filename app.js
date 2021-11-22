@@ -9,14 +9,6 @@ const connection = mysql.createConnection({
   port     : process.env.testport,
 });
 
-// const connection = mysql.createConnection({
-//   host     : "ebdb.csitdsxpoq37.us-east-2.rds.amazonaws.com",
-//   user     : "admin",
-//   password : "EBDBjw.93",
-//   port     : "3306",
-//   database : "EBDB"
-// });
-
 const app = express();
 // app.use(express.json())
 
