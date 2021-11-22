@@ -18,7 +18,7 @@ const connection = mysql.createConnection({
 });
 
 const app = express();
-app.use(express.json())
+// app.use(express.json())
 
 
 
@@ -33,10 +33,11 @@ app.get('/', (req, res) => {
     console.log('Connected to database !!!!.');
   });
   
-  const data = connection.query('SELECT * FROM CONTEST_TYPES;')
+  // const data = connection.query('SELECT * FROM CONTEST_TYPES;')
   connection.end();
   
-  res.json(data);
+  // res.json(data);
+  res.send("Prueba exitosa")
 });
 
 const port = process.env.port || 3000
