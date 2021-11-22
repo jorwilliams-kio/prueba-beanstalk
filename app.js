@@ -17,7 +17,6 @@ const connection = mysql.createConnection({
 
 const app = express();
 
-connection.end();
 
 app.get('/', (req, res) => {
   connection.connect(function(err) {
@@ -26,10 +25,11 @@ app.get('/', (req, res) => {
       console.error('Database message: ' + err.message);
       return;
     }
-  
+    
     console.log('Connected to database !!!!.');
   });
   
+  connection.end();
   // connection.query('SELECT * FROM CATEGORIES')
   
   res.send("Prueba Beanstalk exitosa");
