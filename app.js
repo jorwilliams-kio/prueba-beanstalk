@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
 });
 
 const app = express();
-app.use(express.json());
+// app.use(express.json())
 
 connection.connect(function(err) {
   if (err) {
@@ -23,17 +23,17 @@ connection.connect(function(err) {
   console.log('Connected to database !!!!.');
 });
 
-const data = connection.query('SELECT * FROM CONTEST_TYPES;', function (err, result, fields) {
+const data = connection.query('SELECT * FROM CONTEST_TYPES;', function (err, rows, fields) {
   if (err) throw err;
-  console.log(result);
+  console.log(rows[0]);
 });
 connection.end();
 
 
 app.get('/', (req, res) => {
   // console.log(data);
-  res.json(data);
-  // res.send("Prueba exitosa");
+  // res.json(data);
+  res.send("Prueba exitosa");
 });
 
 const port = process.env.port || 3000
