@@ -23,12 +23,15 @@ connection.connect(function(err) {
   console.log('Connected to database !!!!.');
 });
 
-const data = connection.query('SELECT * FROM CONTEST_TYPES;');
+const data = connection.query('SELECT * FROM CONTEST_TYPES;', function (err, result, fields) {
+  if (err) throw err;
+  console.log(result);
+});
 connection.end();
 
 
 app.get('/', (req, res) => {
-  console.log(data);
+  // console.log(data);
   // res.json(data);
   res.send("Prueba exitosa");
 });
