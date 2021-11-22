@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
 });
 
 const app = express();
-// app.use(express.json())
+app.use(express.json());
 
 connection.connect(function(err) {
   if (err) {
@@ -32,8 +32,8 @@ connection.end();
 
 app.get('/', (req, res) => {
   // console.log(data);
-  // res.json(data);
-  res.send("Prueba exitosa");
+  res.json(data);
+  // res.send("Prueba exitosa");
 });
 
 const port = process.env.port || 3000
