@@ -24,8 +24,10 @@ connection.connect(function(err) {
 });
 
 const data = connection.query('SELECT * FROM CONTEST_TYPES;', function (err, rows, fields) {
-  if (err) throw err;
-  console.log(rows[0].RowDataPacket.name);
+  if (err) {
+    throw err
+  };
+  console.log(rows[0].RowDataPacket);
 });
 connection.end();
 
