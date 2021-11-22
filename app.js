@@ -1,19 +1,19 @@
 // const express = require('express');
-var mysql = require('mysql');
+let mysql = require('mysql');
 
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host     : process.env.RDS_HOSTNAME,
   user     : process.env.RDS_USERNAME,
   password : process.env.RDS_PASSWORD,
   port     : process.env.RDS_PORT,
 });
 
-// const app = express();
+const app = express();
 
-// app.get('/', (req, res) => {
+app.get('/', (req, res) => {
   connection.connect(function(err) {
     if (err) {
-      console.error('Database connection failed: ' + err.stack);
+      // console.error('Database connection failed: ' + err.stack);
       console.error('Database message: ' + err.message);
       return;
     }
@@ -24,10 +24,10 @@ var connection = mysql.createConnection({
   // connection.query('SELECT * FROM CATEGORIES')
 
   connection.end();
-  // res.send("Prueba Beanstalk exitosa");
-// });
+  res.send("Prueba Beanstalk exitosa");
+});
 
-// const port = process.env.port || 3000
-// app.listen(port, () => {
-//   console.log("Server up");
-// })
+const port = process.env.port || 3000
+app.listen(port, () => {
+  console.log("Server up");
+})
