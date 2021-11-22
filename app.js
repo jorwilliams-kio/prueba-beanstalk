@@ -17,21 +17,21 @@ const connection = mysql.createConnection({
 
 const app = express();
 
-connection.connect(function(err) {
-  if (err) {
-    // console.error('Database connection failed: ' + err.stack);
-    console.error('Database message: ' + err.message);
-    return;
-  }
-
-  console.log('Connected to database !!!!.');
-});
-
-// connection.query('SELECT * FROM CATEGORIES')
-
 connection.end();
 
 app.get('/', (req, res) => {
+  connection.connect(function(err) {
+    if (err) {
+      // console.error('Database connection failed: ' + err.stack);
+      console.error('Database message: ' + err.message);
+      return;
+    }
+  
+    console.log('Connected to database !!!!.');
+  });
+  
+  // connection.query('SELECT * FROM CATEGORIES')
+  
   res.send("Prueba Beanstalk exitosa");
 });
 
