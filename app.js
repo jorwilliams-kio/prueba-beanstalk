@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
   const data = connection.query('USE EBDB; SELECT * FROM CONTEST_TYPES;')
   connection.end();
   
-  res.send(JSON.stringify(data));
+  res.json(JSON.stringify(data));
 });
 
 const port = process.env.port || 3000
