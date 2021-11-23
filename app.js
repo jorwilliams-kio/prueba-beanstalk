@@ -23,18 +23,18 @@ app.get('/', (req, res) => {
       console.error('Database message: ' + err.message);
       return;
     }
-    connection.query('SELECT * FROM CONTEST_TYPES WHERE contest_type_id = 1;', function (err, result, fields) {
+    connection.query('SELECT * FROM CONTEST_TYPES;', function (err, result, fields) {
       if (err) {
         throw err
       };
       Object.keys(result).forEach((index)=>{
-        resultList.push(result[index]);
+        resultList.push(index);
       })
     });
     console.log('Connected to database !!!!.');
     connection.release(()=>console.log("Released connection"));
   })
-  res.json({resultList})
+  res.json(resultList);
 
   // let resultList = [];
   
