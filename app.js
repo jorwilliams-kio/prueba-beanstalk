@@ -15,7 +15,7 @@ app.use(express.json());
 
 
 
-app.get('/', (req, res) => {
+app.get('/database', (req, res) => {
 
   let resultList = [];
   pool.getConnection(function(err, connection) {
@@ -57,6 +57,10 @@ app.get('/', (req, res) => {
   // connection.release(()=>console.log("Released connection"));
   // res.send("Prueba exitosa");
   // res.json({resultList})
+});
+
+app.get('/', (req, res) => {
+  res.send("Prueba exitosa")
 });
 
 const port = process.env.port || 3000
