@@ -15,15 +15,15 @@ app.use(express.json());
 
 
 
-app.get('/database', async (req, res) => {
+app.get('/database', (req, res) => {
 
-  pool.getConnection(async function(err, connection) {
-    const resultList = [];
+  let resultList = [];
+  pool.getConnection(function(err, connection) {
     if (err) {
       console.error('Database message: ' + err.message);
       return;
     }
-    await connection.query('SELECT * FROM CONTEST_TYPES;', function (err, result, fields) {
+    connection.query('SELECT * FROM CONTEST_TYPES;', function (err, result, fields) {
       if (err) {
         throw err
       };
@@ -33,9 +33,9 @@ app.get('/database', async (req, res) => {
       })
     });
     console.log('Connected to database !!!!.');
-    res.json(resultList);
     connection.release(()=>console.log("Released connection"));
   })
+  res.send(resultList);
 });
 
 app.get('/', (req, res) => {
