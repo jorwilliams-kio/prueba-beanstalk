@@ -17,8 +17,8 @@ app.use(express.json());
 
 app.get('/database', async (req, res) => {
 
-  const resultList = [];
   pool.getConnection(async function(err, connection) {
+    const resultList = [];
     if (err) {
       console.error('Database message: ' + err.message);
       return;
@@ -34,8 +34,8 @@ app.get('/database', async (req, res) => {
     });
     console.log('Connected to database !!!!.');
     connection.release(()=>console.log("Released connection"));
+    res.json(resultList);
   })
-  res.json(resultList);
 });
 
 app.get('/', (req, res) => {
