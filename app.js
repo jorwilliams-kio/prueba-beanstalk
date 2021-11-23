@@ -29,7 +29,7 @@ app.get('/database', (req, res) => {
 
       Object.keys(result).forEach((index)=>{
         console.log(result[index].name);
-        data.push(result[index]);
+        data.push(result[index].name);
       });
 
     });
