@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.get('/database', async (req, res) => {
 
-  let resultList = [];
+  const resultList = [];
   pool.getConnection(async function(err, connection) {
     if (err) {
       console.error('Database message: ' + err.message);
