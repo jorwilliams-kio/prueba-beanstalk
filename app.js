@@ -1,7 +1,6 @@
 const express = require('express');
 // const { json } = require('express/lib/response');
 let mysql = require('mysql');
-
 const connection = mysql.createConnection({
   host     : process.env.testhost,
   user     : process.env.testusername,
@@ -11,7 +10,7 @@ const connection = mysql.createConnection({
 });
 
 const app = express();
-// app.use(express.json())
+app.use(express.json())
 
 connection.connect(function(err) {
   if (err) {
@@ -29,13 +28,14 @@ const data = connection.query('SELECT * FROM CONTEST_TYPES WHERE contest_type_id
   };
   console.log(rows[0]);
 });
-connection.end();
+connection.end(()=>console.log("Terminated connection"));
 
 
 app.get('/', (req, res) => {
   // console.log(data);
   // res.json(data);
-  res.send("Prueba exitosa");
+  // res.send("Prueba exitosa");
+  res.send(data);
 });
 
 const port = process.env.port || 3000
