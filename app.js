@@ -15,20 +15,21 @@ app.use(express.json());
 
 
 
-app.get('/database', (req, res) => {
+app.get('/database', async (req, res) => {
 
   let resultList = [];
-  pool.getConnection(function(err, connection) {
+  pool.getConnection(async function(err, connection) {
     if (err) {
       console.error('Database message: ' + err.message);
       return;
     }
-    connection.query('SELECT * FROM CONTEST_TYPES;', function (err, result, fields) {
+    await connection.query('SELECT * FROM CONTEST_TYPES;', function (err, result, fields) {
       if (err) {
         throw err
       };
       Object.keys(result).forEach((index)=>{
         resultList.push(index);
+        console.log(result[index]);
       })
     });
     console.log('Connected to database !!!!.');
