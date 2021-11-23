@@ -33,9 +33,8 @@ connection.end(()=>console.log("Terminated connection"));
 
 app.get('/', (req, res) => {
   // console.log(data);
-  // res.json(data);
+  res.json(data);
   // res.send("Prueba exitosa");
-  res.send(data);
 });
 
 const port = process.env.port || 3000
