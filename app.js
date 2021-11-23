@@ -33,8 +33,8 @@ app.get('/database', async (req, res) => {
       })
     });
     console.log('Connected to database !!!!.');
-    connection.release(()=>console.log("Released connection"));
     res.json(resultList);
+    connection.release(()=>console.log("Released connection"));
   })
 });
 
