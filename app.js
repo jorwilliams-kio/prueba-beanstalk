@@ -36,10 +36,10 @@ app.get('/database', (req, res) => {
 
     console.log('Connected to database !!!!.');
     connection.release(()=>console.log("Released connection"));
+    res.json(data);
 
   })
 
-  res.json(data);
 
 });
 
