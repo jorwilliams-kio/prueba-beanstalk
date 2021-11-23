@@ -28,7 +28,7 @@ app.get('/database', async (req, res) => {
         throw err
       };
       Object.keys(result).forEach((index)=>{
-        resultList.push(index);
+        resultList.push(result[index].name);
         console.log(result[index].name);
       })
     });
