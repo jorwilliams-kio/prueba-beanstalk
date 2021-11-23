@@ -10,7 +10,9 @@ const connection = mysql.createConnection({
 });
 
 const app = express();
-app.use(express.json())
+app.use(express.json());
+
+let resultList = null
 
 connection.connect(function(err) {
   if (err) {
@@ -22,19 +24,22 @@ connection.connect(function(err) {
   console.log('Connected to database !!!!.');
 });
 
-const data = connection.query('SELECT * FROM CONTEST_TYPES WHERE contest_type_id = 1;', function (err, rows, fields) {
+const data = connection.query('SELECT * FROM CONTEST_TYPES WHERE contest_type_id = 1;', function (err, result, fields) {
   if (err) {
     throw err
   };
-  console.log(rows[0]);
+  Object.keys(result).forEach((data)=>{
+    console.log(data);
+  })
+  // console.log(rows[0]);
 });
 connection.end(()=>console.log("Terminated connection"));
 
 
 app.get('/', (req, res) => {
   // console.log(data);
-  res.json({...data});
-  // res.send("Prueba exitosa");
+  // res.json({...data});
+  res.send("Prueba exitosa");
 });
 
 const port = process.env.port || 3000
