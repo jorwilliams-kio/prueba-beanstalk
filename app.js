@@ -13,11 +13,9 @@ const pool = mysql.createPool({
 const app = express();
 app.use(express.json());
 
-
-
 app.get('/database', (req, res) => {
 
-  let resultList = [];
+  let resultList = "a";
   pool.getConnection(function(err, connection) {
     if (err) {
       console.error('Database message: ' + err.message);
@@ -27,8 +25,9 @@ app.get('/database', (req, res) => {
       if (err) {
         throw err
       };
+      resultList = {...result};
       Object.keys(result).forEach((index)=>{
-        resultList.push(result[index].name);
+        // console.log(resultList.push(result[index].name));
         console.log(result[index].name);
       })
     });
