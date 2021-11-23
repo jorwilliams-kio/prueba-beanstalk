@@ -1,5 +1,5 @@
 const express = require('express');
-// const { json } = require('express/lib/response');
+const { json } = require('express/lib/response');
 let mysql = require('mysql');
 const pool = mysql.createPool({
   connectionLimit: 10,
@@ -14,27 +14,33 @@ const app = express();
 app.use(express.json());
 
 app.get('/database', (req, res) => {
-
-  let resultList = "a";
+  let data = [];
   pool.getConnection(function(err, connection) {
+    
     if (err) {
-      console.error('Database message: ' + err.message);
-      return;
+      throw err
     }
+
     connection.query('SELECT * FROM CONTEST_TYPES;', function (err, result, fields) {
+      
       if (err) {
         throw err
       };
-      resultList = {...result};
+
       Object.keys(result).forEach((index)=>{
-        // console.log(resultList.push(result[index].name));
         console.log(result[index].name);
-      })
+        data.push(result[index]);
+      });
+
     });
+
     console.log('Connected to database !!!!.');
     connection.release(()=>console.log("Released connection"));
+
   })
-  res.send(resultList);
+
+  res.json(data);
+
 });
 
 app.get('/', (req, res) => {
