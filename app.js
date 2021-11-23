@@ -1,7 +1,7 @@
 const express = require('express');
 // const { json } = require('express/lib/response');
 let mysql = require('mysql');
-const connection = mysql.createPool({
+const pool = mysql.createPool({
   connectionLimit: 10,
   host     : process.env.testhost,
   user     : process.env.testusername,
@@ -16,32 +16,47 @@ app.use(express.json());
 
 
 app.get('/', (req, res) => {
+
   let resultList = [];
-  
-  connection.connect(function(err) {
+  pool.getConnection(function(err, connection) {
     if (err) {
-      // console.error('Database connection failed: ' + err.stack);
       console.error('Database message: ' + err.message);
       return;
     }
-    
+    connection.query('SELECT * FROM CONTEST_TYPES WHERE contest_type_id = 1;', function (err, result, fields) {
+      if (err) {
+        throw err
+      };
+      Object.keys(result).forEach((index)=>{
+        resultList.push(result[index]);
+      })
+    });
     console.log('Connected to database !!!!.');
-  });
-  
-  const data = connection.query('SELECT * FROM CONTEST_TYPES WHERE contest_type_id = 1;', function (err, result, fields) {
-    if (err) {
-      throw err
-    };
-    Object.keys(result).forEach((index)=>{
-      resultList.push(result[index]);
-    })
-    // console.log(rows[0]);
-  });
-  connection.release(()=>console.log("Released connection"));
-  // console.log(data);
-  // res.json({...data});
-  // res.send("Prueba exitosa");
+    connection.release(()=>console.log("Released connection"));
+  })
   res.json({resultList})
+
+  // let resultList = [];
+  
+  // connection.connect(function(err) {
+  //   if (err) {
+  //     console.error('Database message: ' + err.message);
+  //     return;
+  //   }
+  //   console.log('Connected to database !!!!.');
+  // });
+  
+  // connection.query('SELECT * FROM CONTEST_TYPES WHERE contest_type_id = 1;', function (err, result, fields) {
+  //   if (err) {
+  //     throw err
+  //   };
+  //   Object.keys(result).forEach((index)=>{
+  //     resultList.push(result[index]);
+  //   })
+  // });
+  // connection.release(()=>console.log("Released connection"));
+  // res.send("Prueba exitosa");
+  // res.json({resultList})
 });
 
 const port = process.env.port || 3000
