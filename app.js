@@ -23,11 +23,11 @@ connection.connect(function(err) {
   console.log('Connected to database !!!!.');
 });
 
-const data = connection.query('SELECT * FROM CONTEST_TYPES WHERE contest_type_id = 1 AS data;', function (err, rows, fields) {
+const data = connection.query('SELECT * FROM CONTEST_TYPES WHERE contest_type_id = 1;', function (err, rows, fields) {
   if (err) {
     throw err
   };
-  console.log(rows[0].data);
+  console.log(rows[0]);
 });
 connection.end();
 
