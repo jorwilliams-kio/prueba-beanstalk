@@ -29,35 +29,13 @@ app.get('/database', async (req, res) => {
       };
       Object.keys(result).forEach((index)=>{
         resultList.push(index);
-        console.log(result[index]);
+        console.log(result[index].name);
       })
     });
     console.log('Connected to database !!!!.');
     connection.release(()=>console.log("Released connection"));
   })
   res.json(resultList);
-
-  // let resultList = [];
-  
-  // connection.connect(function(err) {
-  //   if (err) {
-  //     console.error('Database message: ' + err.message);
-  //     return;
-  //   }
-  //   console.log('Connected to database !!!!.');
-  // });
-  
-  // connection.query('SELECT * FROM CONTEST_TYPES WHERE contest_type_id = 1;', function (err, result, fields) {
-  //   if (err) {
-  //     throw err
-  //   };
-  //   Object.keys(result).forEach((index)=>{
-  //     resultList.push(result[index]);
-  //   })
-  // });
-  // connection.release(()=>console.log("Released connection"));
-  // res.send("Prueba exitosa");
-  // res.json({resultList})
 });
 
 app.get('/', (req, res) => {
